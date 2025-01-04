@@ -5,10 +5,10 @@
 
 enum layers {
 	_BASE,
+	_GAME,
 	_SPACE,
 	_ALT,
 	_CTRL,
-	_GAME,
 };
 
 #define ZL_SPC LT(_SPACE, KC_SPC)
@@ -41,6 +41,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB, Z_A,     Z_S,  Z_D,  Z_F,  KC_G, KC_H, Z_J,  Z_K,     Z_L,    Z_SCLN,  KC_ENT,
 	KC_NO,  KC_Z,    KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
 	ZL_CTL, ZL_GAME, ZL_ALT,                ZL_SPC,               ZL_ALT, QK_BOOT, ZL_CTL
+),
+
+// ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬──────┐
+// │Esc│ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │ Bspc │
+// ├───┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬─────┤
+// │ Tb │ A │ S │ D │ F │ G │ H │ J │ K │ L │ ; │ Ent │
+// ├────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬───┤
+// │ Shft │ Z │ X │ C │ V │ B │ N │ M │ , │ . │ / │Sft│
+// ├────┬─┴─┬─┴──┬┴───┴───┴───┴───┴───┴───┼───┼───┼───┤
+// │Ctrl│   │LAlt│      Space / SpcL      │AlL│GaL│CtL│
+// └────┴───┴────┴────────────────────────┴───┴───┴───┘
+
+[_GAME] = LAYOUT_solid_space(
+	KC_ESC,  KC_Q,  KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I,    KC_O,   KC_P,    KC_BSPC,
+	KC_TAB,  KC_A,  KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN, KC_ENT,
+	KC_LSFT, KC_Z,  KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
+	KC_LCTL, KC_NO, KC_LALT,               ZL_SPC,               ZL_ALT, ZL_GAME, ZL_CTL
 ),
 
 // ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬──────┐
@@ -88,27 +105,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // └────┴───┴────┴────────────────────────┴───┴───┴───┘
 
 [_CTRL] = LAYOUT_solid_space(
-	KC_F12, KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11,
-	KC_F24, KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23,
-	KC_NO,  KC_NO, KC_NO,   KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-	KC_TRNS, KC_NO, KC_NO,                      KC_NO,                      KC_NO,  KC_NO,  KC_TRNS
-),
-
-// ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬──────┐
-// │Esc│ Q │ W │ E │ R │ T │ Y │ U │ I │ O │ P │ Bspc │
-// ├───┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬─────┤
-// │ Tb │ A │ S │ D │ F │ G │ H │ J │ K │ L │ ; │ Ent │
-// ├────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬───┤
-// │ Shft │ Z │ X │ C │ V │ B │ N │ M │ , │ . │ / │Sft│
-// ├────┬─┴─┬─┴──┬┴───┴───┴───┴───┴───┴───┼───┼───┼───┤
-// │Ctrl│   │LAlt│      Space / SpcL      │AlL│GaL│CtL│
-// └────┴───┴────┴────────────────────────┴───┴───┴───┘
-
-[_GAME] = LAYOUT_solid_space(
-	KC_ESC,  KC_Q,  KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I,    KC_O,   KC_P,    KC_BSPC,
-	KC_TAB,  KC_A,  KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K,    KC_L,   KC_SCLN, KC_ENT,
-	KC_LSFT, KC_Z,  KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,
-	KC_LCTL, KC_NO, KC_LALT,               ZL_SPC,               ZL_ALT, ZL_GAME, ZL_CTL
+	KC_F12,  KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9,  KC_F10, KC_F11,
+	KC_F24,  KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18, KC_F19, KC_F20, KC_F21, KC_F22, KC_F23,
+	KC_NO,   KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+	KC_TRNS, KC_NO,  KC_NO,                      KC_NO,                      KC_NO,  KC_NO,  KC_TRNS
 )
 
 };
